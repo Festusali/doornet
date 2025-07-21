@@ -20,7 +20,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -115,6 +115,21 @@
         <section class="main">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="shadow">
+                        <div class="display-5 fw-bold text-center pt-3">
+                            <div>Promo Sales!!!</div>
+                            <div class="m1 p-3">
+                                <h2 class="text-dark fw-bold">
+                                    Promo Price: <span class="text-success">₦20,000.00</span> <br>
+                                    Normal Price: <small
+                                        class="text-danger text-decoration-line-through">₦32,000.00</small>
+                                </h2>
+                                <p class="px-3 my-3 text-center">
+                                    <a href="#order" class="btn btn-lg btn-success rounded-pill px-5">Order now</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="shadow">
                         <div class="m1 p-3">
                             This amazing instant magnetic net keeps the fresh air in, protects from mosquitoes, insects
@@ -349,7 +364,7 @@
                     <strong>
                         Normal Price: <span class="text-danger" style="text-decoration: line-through;">₦32,000</span>
                         <br>
-                        Promo Price: <span class="text-success">₦25,500</span>
+                        Promo Price: <span class="text-success">₦20,000</span>
                     </strong> <br>
                 </p>
                 <h2 class="text-primary">
