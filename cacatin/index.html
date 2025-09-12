@@ -598,7 +598,14 @@
                                     name="address" id="address" required>
                             </div>
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success btn-lg px-4 py-3 rounded-pill mt-4 mb-2">
+                                <button type="submit" class="btn btn-success btn-lg px-4 py-3 rounded-pill mt-4 mb-2"
+                                    onclick="fbq('track', 'AddToCart', {
+                                    content_name: 'Cacatin Herbal Care',
+                                    content_ids: ['CACATIN-001'],
+                                    content_type: 'product',
+                                    value: 1600.00,
+                                    currency: 'NGN'
+                                })">
                                     Order Now!
                                 </button>
                             </div>

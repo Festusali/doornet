@@ -61,6 +61,24 @@
         <img height="1" width="1" src="https://www.facebook.com/tr?id=1855840178474442&ev=PageView
     &noscript=1" />
     </noscript>
+
+    <!-- START Purchase event code -->
+    <script>
+        const orderId = new URLSearchParams(window.location.search).get('order_id');
+        const hasTracked = sessionStorage.getItem(`purchase_${orderId}`);
+
+        if (orderId && !hasTracked) {
+            fbq('track', 'Purchase', {
+                content_ids: [orderId],
+                content_type: 'product',
+                value: 16000.00,
+                currency: 'NGN',
+                event_id: orderId
+            });
+            sessionStorage.setItem(`purchase_${orderId}`, 'true');
+        }
+    </script>
+    <!-- END Purchase event code -->
     <!-- End Meta Pixel Code -->
 </head>
 
