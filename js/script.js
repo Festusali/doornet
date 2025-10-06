@@ -28,3 +28,27 @@ function checkForm() {
     return true;
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const videos = document.querySelectorAll(".unmute-video");
+
+  videos.forEach((video) => {
+    video.muted = false; // Try to play unmuted first
+
+    let playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then((_) => {
+          // Autoplay started!
+        })
+        .catch((error) => {
+          // Autoplay was prevented.
+          // Show a "Play" button or simply play it muted.
+          console.log("Autoplay with sound was blocked. Playing muted.", error);
+          video.muted = true;
+          video.play();
+        });
+    }
+  });
+});
