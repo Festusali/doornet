@@ -41,12 +41,18 @@ document.addEventListener("DOMContentLoaded", function () {
       playPromise
         .then((_) => {
           // Autoplay started!
+          console.log("Unmuted playing of the media");
         })
         .catch((error) => {
           // Autoplay was prevented.
           // Show a "Play" button or simply play it muted.
           console.log("Autoplay with sound was blocked. Playing muted.", error);
-          video.muted = true;
+          console.log("False unmuted playing of the media after 5 seconds");
+          setTimeout(() => {
+            video.muted = true;
+            video.play();
+          }, 5000); // Play muted after 5 seconds
+          video.muted = false;
           video.play();
         });
     }
