@@ -81,6 +81,34 @@
     }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
+
+  <!-- START Purchase event code -->
+  <script>
+    const orderId = new URLSearchParams(window.location.search).get('order_id');
+    const hasTracked = sessionStorage.getItem(`purchase_${orderId}`);
+
+    if (orderId && !hasTracked) {
+      // Record Facebook purchase event
+      fbq('track', 'Purchase', {
+        content_ids: [orderId],
+        content_type: 'product',
+        value: 20000.00,
+        currency: 'NGN',
+        event_id: orderId
+      });
+
+      // Record TikTok purchase event
+      ttq.track('Purchase', {
+        content_id: orderId,
+        content_type: 'product',
+        value: 20000.00,
+        currency: 'NGN'
+      });
+
+      sessionStorage.setItem(`purchase_${orderId}`, 'true');
+    }
+  </script>
+  <!-- END Purchase event code -->
 </head>
 
 <body>

@@ -370,7 +370,7 @@
       </p>
 
       <form name="orderForm" method="POST" onsubmit="return checkForm()"
-        action="https://myform.wpromote-ws.com/process-doornet-form/?r=https://kinaxydoornet.com/mistletoe/order-received.html&bU=https://kinaxydoornet.com/mistletoe/">
+        action="https://myform.wpromote-ws.com/process-kinaxy-form/?r=https://kinaxydoornet.com/mistletoe/order-received.html&bU=https://kinaxydoornet.com/mistletoe/">
         <input type="hidden" name="subject" value="New Order For Mistletoe Tea" />
         <input type="hidden" name="price" value="₦0.00" />
         <input type="hidden" name="productName" value="Mistletoe Tea" />
@@ -420,8 +420,21 @@
               id="address" required>
           </div>
           <div class="col-sm-6 mb-3">
-            <button type="submit" class="btn btn-success btn-lg px-3 id-block rounded-pill mt-4 mb-2">Order
-              Now!</button>
+            <button type="submit" class="btn btn-success btn-lg px-3 id-block rounded-pill mt-4 mb-2"
+            onclick="fbq('track', 'AddToCart', {
+                content_name: 'MISTLETOE TEA',
+                content_ids: ['KINAXY-007'],
+                content_type: 'product',
+                value: 20000.00,
+                currency: 'NGN'
+            })
+            ttq.track('AddToCart', {
+                content_id: 'KINAXY-007',
+                content_type: 'product',
+                value: 20000.00,
+                currency: 'NGN'
+            }
+            )">Order Now!</button>
           </div>
         </div>
       </form>
