@@ -494,22 +494,22 @@
                     <div class="row field-row">
                         <div class="col-sm-6 mb-3">
                             <label for="fullname" class="form-label">Full Name *</label>
-                            <input type="text" class="form-control" placeholder="Firstname Lastname" name="fullname"
+                            <input type="text" class="form-control" placeholder="Firstname Lastname" name="fullname" id="fullname"
                                 required>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="email@example.com" name="email">
+                            <input type="email" class="form-control" placeholder="email@example.com" name="email" id="email">
                         </div>
                     </div>
                     <div class="row field-row">
                         <div class="col-sm-6 mb-3">
                             <label for="phone" class="form-label">Phone *</label>
-                            <input type="tel" class="form-control" placeholder="07067868317" name="phone" required>
+                            <input type="tel" class="form-control" placeholder="07067868317" name="phone" id="phone" required>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="alt_phone" class="form-label">Alternative Phone</label>
-                            <input type="tel" class="form-control" placeholder="07067868317" name="alt_phone">
+                            <input type="tel" class="form-control" placeholder="07067868317" name="alt_phone" id="alt_phone">
                         </div>
                     </div>
                     <div class="row field-row">
@@ -527,9 +527,9 @@
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="state" class="form-label">Delivery State/Region *</label>
-                            <input type="text" id="state" name="state" class="form-control"
-                                placeholder="Enter state/region" required>
-                            <!-- <select name="state" id="state" required class="form-select">
+                            <!-- <input type="text" id="state" name="state" class="form-control"
+                                placeholder="Enter state/region" required> -->
+                            <select name="state" id="state" required class="form-select">
                                 <option value="" selected="selected">Delivery State *</option>
                                 <option value="Lagos">Lagos</option>
                                 <option value="Abuja">Abuja</option>
@@ -568,7 +568,7 @@
                                 <option value="Taraba">Taraba</option>
                                 <option value="Yobe">Yobe</option>
                                 <option value="Zamfara">Zamfara</option>
-                            </select> -->
+                            </select>
                         </div>
                     </div>
                     <div class="row field-row mb-3">
@@ -587,7 +587,7 @@
                                 else if (quantity === '4') price = 86000;
                                 else if (quantity === '5') price = 105000;
                                 else if (quantity === '6') price = 120000;
-                                
+
                                 if (price > 0) {
                                     ttq.track('AddToCart', { contents: [{ content_id: 'SMN-001', content_name: 'Screen Magnetic Net', quantity: parseInt(quantity), price: price }], value: price, currency: 'NGN' });
                                 }
