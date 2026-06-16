@@ -1,33 +1,75 @@
 // Script for managing orders for Screen Magnetic Door Net
 
-// Assigns corresponding value to price based on Net quantity
-function checkForm() {
-  orderQty = document.orderForm.quantity;
-  if (orderQty.value == 1) {
-    document.orderForm.price.value = "₦25,000";
-    return true;
+function disableOrderButtons() {
+  const normalBtn = document.getElementById("orderNowBtn");
+  const whatsappBtn = document.getElementById("whatsappOrderBtn");
+
+  if (normalBtn) {
+    normalBtn.disabled = true;
+    normalBtn.innerText = "Submitting...";
   }
-  if (orderQty.value == 2) {
-    document.orderForm.price.value = "₦45,000";
-    return true;
-  }
-  if (orderQty.value == 3) {
-    document.orderForm.price.value = "₦66,000";
-    return true;
-  }
-  if (orderQty.value == 4) {
-    document.orderForm.price.value = "₦86,000";
-    return true;
-  }
-  if (orderQty.value == 5) {
-    document.orderForm.price.value = "₦105,000";
-    return true;
-  }
-  if (orderQty.value == 6) {
-    document.orderForm.price.value = "₦120,000";
-    return true;
+
+  if (whatsappBtn) {
+    whatsappBtn.disabled = true;
+    whatsappBtn.innerText = "Submitting...";
   }
 }
+
+document.orderForm.addEventListener("submit", function () {
+  disableOrderButtons();
+});
+
+// Assigns corresponding value to price based on Net quantity
+function getPrice(quantity) {
+  const prices = {
+    1: "₦25,000",
+    2: "₦45,000",
+    3: "₦66,000",
+    4: "₦86,000",
+    5: "₦105,000",
+    6: "₦120,000",
+  };
+
+  return prices[quantity] || "₦0.00";
+}
+
+function checkForm() {
+  const form = document.orderForm;
+  form.price.value = getPrice(form.quantity.value);
+
+  return true;
+}
+
+// Assign order channel as whatsapp
+document
+  .getElementById("whatsappOrderBtn")
+  .addEventListener("click", function () {
+    const form = document.orderForm;
+
+    if (!form.reportValidity()) {
+      return;
+    }
+
+    checkForm();
+
+    const message = {
+      fullname: form.fullname.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      altPhone: form.alt_phone.value,
+      quantity: form.quantity.value,
+      price: form.price.value,
+      state: form.state.value,
+      address: form.address.value,
+      product: form.productName.value,
+    };
+
+    sessionStorage.setItem("pendingWhatsappOrder", JSON.stringify(message));
+
+    disableOrderButtons();
+
+    form.submit();
+  });
 
 document.addEventListener("DOMContentLoaded", function () {
   const videos = document.querySelectorAll(".unmute-video");
