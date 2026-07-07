@@ -45,8 +45,6 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '999699278983855');
         fbq('track', 'PageView');
-        fbq('track', 'AddToWishlist');
-        fbq('track', 'AddToCart');
     </script>
     <noscript>
         <img height="1" width="1" 
@@ -70,25 +68,56 @@
         }(window, document, 'ttq');
     </script>
     <!-- TikTok Pixel Code End -->
-    
-    <!-- START TikTok Purchase event code -->
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const orderId = params.get('order_id');
-        const price = parseFloat(params.get('price'));
-        const quantity = parseInt(params.get('quantity'));
-        const hasTracked = sessionStorage.getItem(`tiktok_purchase_${orderId}`);
 
-        if (orderId && price > 0 && !hasTracked) {
-            ttq.track('Purchase', { contents: [{ content_id: 'SMN-001', content_name: 'Screen Magnetic Net', quantity: quantity, price: price }], value: price, currency: 'NGN' });
-            sessionStorage.setItem(`tiktok_purchase_${orderId}`, 'true');
-        }
+    <!-- START Unified Meta & TikTok Purchase Tracking Code -->
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('order_id');
+            const price = parseFloat(params.get('price')) || 0;
+            const quantity = parseInt(params.get('quantity')) || 1;
+
+            // Execute tracking parameters if a valid order confirmation setup exists
+            if (orderId && price > 0) {
+                const hasTracked = sessionStorage.getItem(`purchase_tracked_${orderId}`);
+                if (!hasTracked) {
+
+                    // 1. Fire TikTok Purchase Event
+                    if (typeof ttq !== 'undefined') {
+                        ttq.track('Purchase', {
+                            contents: [{
+                                content_id: 'SMN-001',
+                                content_name: 'Screen Magnetic Net',
+                                quantity: quantity,
+                                price: price
+                            }],
+                            value: price,
+                            currency: 'NGN'
+                        });
+                    }
+
+                    // 2. Fire Meta (Facebook) Purchase Event
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Purchase', {
+                            content_ids: ['SMN-001'],
+                            content_type: 'product',
+                            content_name: 'Screen Magnetic Net',
+                            value: price,
+                            currency: 'NGN'
+                        });
+                    }
+
+                    // Set safety flag to block duplicate conversions on page refreshes
+                    sessionStorage.setItem(`purchase_tracked_${orderId}`, 'true');
+                }
+            }
+        })();
     </script>
-    <!-- END TikTok Purchase event code -->
-    <!-- End Door Net Pixel Code -->
+    <!-- END Unified Meta & TikTok Purchase Tracking Code -->
 
-    <!-- START Track Order Via WhatsApp Purchases -->
+    <!-- START Track Order Via WhatsApp Purchases & Redirect -->
     <script>
+        (function () {
         const pendingOrder = sessionStorage.getItem('pendingWhatsappOrder');
 
         if (pendingOrder) {
@@ -111,15 +140,18 @@ Amount: ${order.price}
 State: ${order.state}
 Delivery Address: ${order.address}`;
 
+            // Clear out order storage before navigating away
             sessionStorage.removeItem('pendingWhatsappOrder');
 
+            // Perform the secure browser redirection to the WhatsApp text API
             window.location.replace(
                 'https://wa.me/2347067868317?text=' +
                 encodeURIComponent(message)
             );
         }
+        })();
     </script>
-    <!-- END Track Order Via WhatsApp Purchases -->
+    <!-- END Track Order Via WhatsApp Purchases & Redirect -->
 </head>
 <body>
     <main>
