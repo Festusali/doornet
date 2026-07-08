@@ -52,6 +52,7 @@
         &noscript=1"/>
     </noscript>
     <!-- End Meta Pixel Code -->
+
     <!-- TikTok Pixel Code Start -->
     <script>
         !function (w, d, t) {
@@ -69,66 +70,23 @@
     </script>
     <!-- TikTok Pixel Code End -->
 
-    <!-- START Unified Meta & TikTok Purchase Tracking Code -->
+    <!-- START Purchase Tracking + WhatsApp Redirect -->
     <script>
         (function () {
-            const params = new URLSearchParams(window.location.search);
-            const orderId = params.get('order_id');
-            const price = parseFloat(params.get('price')) || 0;
-            const quantity = parseInt(params.get('quantity')) || 1;
+            /**
+             * Redirect WhatsApp orders after tracking has completed.
+             */
+            function redirectToWhatsApp(orderId) {
+                const pendingOrder = sessionStorage.getItem('pendingWhatsappOrder');
 
-            // Execute tracking parameters if a valid order confirmation setup exists
-            if (orderId && price > 0) {
-                const hasTracked = sessionStorage.getItem(`purchase_tracked_${orderId}`);
-                if (!hasTracked) {
-
-                    // 1. Fire TikTok Purchase Event
-                    if (typeof ttq !== 'undefined') {
-                        ttq.track('Purchase', {
-                            contents: [{
-                                content_id: 'SMN-001',
-                                content_name: 'Screen Magnetic Net',
-                                quantity: quantity,
-                                price: price
-                            }],
-                            value: price,
-                            currency: 'NGN'
-                        });
-                    }
-
-                    // 2. Fire Meta (Facebook) Purchase Event
-                    if (typeof fbq !== 'undefined') {
-                        fbq('track', 'Purchase', {
-                            content_ids: ['SMN-001'],
-                            content_type: 'product',
-                            content_name: 'Screen Magnetic Net',
-                            value: price,
-                            currency: 'NGN'
-                        });
-                    }
-
-                    // Set safety flag to block duplicate conversions on page refreshes
-                    sessionStorage.setItem(`purchase_tracked_${orderId}`, 'true');
+                if (!pendingOrder) {
+                    return;
                 }
-            }
-        })();
-    </script>
-    <!-- END Unified Meta & TikTok Purchase Tracking Code -->
 
-    <!-- START Track Order Via WhatsApp Purchases & Redirect -->
-    <script>
-        (function () {
-        const pendingOrder = sessionStorage.getItem('pendingWhatsappOrder');
-
-        if (pendingOrder) {
-            const order = JSON.parse(pendingOrder);
-
-            const params = new URLSearchParams(window.location.search);
-            const orderId = params.get('order_id');
-
-            const message =
-`Hello, I placed an order for "${order.product}".
-
+                const order = JSON.parse(pendingOrder);
+                const message =
+                    `Hello, I placed an order for "${order.product}".
+    
 Order ID: ${orderId}
 
 Full Name: ${order.fullname}
@@ -140,18 +98,98 @@ Amount: ${order.price}
 State: ${order.state}
 Delivery Address: ${order.address}`;
 
-            // Clear out order storage before navigating away
-            sessionStorage.removeItem('pendingWhatsappOrder');
+                // Prevent duplicate WhatsApp redirects
+                sessionStorage.removeItem('pendingWhatsappOrder');
 
-            // Perform the secure browser redirection to the WhatsApp text API
-            window.location.replace(
-                'https://wa.me/2347067868317?text=' +
-                encodeURIComponent(message)
-            );
-        }
+                window.location.replace(
+                    'https://wa.me/2347067868317?text=' +
+                    encodeURIComponent(message)
+                );
+            }
+
+            window.addEventListener('load', function () {
+                // Give Meta & TikTok pixels time to finish loading
+                setTimeout(function () {
+                    const params = new URLSearchParams(window.location.search);
+
+                    const orderId = params.get('order_id');
+                    const price = Number(params.get('price')) || 25000;
+                    const quantity = Number(params.get('quantity')) || 1;
+
+                    console.log("Order ID:", orderId);
+                    console.log("Price:", price);
+                    console.log("Quantity:", quantity);
+
+                    // Nothing to track without an order ID
+                    if (!orderId) {
+                        console.log("No order ID found.");
+                        redirectToWhatsApp('');
+                        return;
+                    }
+
+                    const trackingKey = `purchase_tracked_${orderId}`;
+
+                    if (!sessionStorage.getItem(trackingKey)) {
+                        console.log("Tracking purchase...");
+
+                        // ==========================
+                        // TikTok Purchase
+                        // ==========================
+                        if (typeof ttq !== 'undefined' && ttq) {
+                            console.log("TikTok Purchase");
+
+                            ttq.track('Purchase', {
+                                contents: [{
+                                    content_id: 'SMN-001',
+                                    content_name: 'Screen Magnetic Net',
+                                    quantity: quantity,
+                                    price: price
+                                }],
+                                value: price,
+                                currency: 'NGN'
+                            });
+
+                        } else {
+                            console.log("TikTok pixel not detected.");
+                        }
+
+                        // ==========================
+                        // Meta Purchase
+                        // ==========================
+                        if (typeof fbq === 'function') {
+                            console.log("Meta Purchase");
+
+                            fbq('track', 'Purchase', {
+                                content_ids: ['SMN-001'],
+                                content_type: 'product',
+                                content_name: 'Screen Magnetic Net',
+                                value: price,
+                                currency: 'NGN'
+                            });
+
+                        } else {
+                            console.log("Meta pixel not detected.");
+                        }
+
+                        sessionStorage.setItem(trackingKey, 'true');
+                        console.log("Purchase tracked.");
+
+                    } else {
+                        console.log("Purchase already tracked.");
+                    }
+
+                    // Give tracking requests time to leave the browser
+                    setTimeout(function () {
+                        redirectToWhatsApp(orderId);
+                    }, 1500);
+
+                }, 1200);
+
+            });
+
         })();
     </script>
-    <!-- END Track Order Via WhatsApp Purchases & Redirect -->
+    <!-- END Purchase Tracking + WhatsApp Redirect -->
 </head>
 <body>
     <main>
