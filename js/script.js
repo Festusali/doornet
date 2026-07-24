@@ -18,12 +18,16 @@ function disableOrderButtons() {
 // Assigns corresponding value to price based on Net quantity
 function getPrice(quantity) {
   const prices = {
-    1: "₦25,000",
-    2: "₦45,000",
-    3: "₦66,000",
-    4: "₦86,000",
-    5: "₦105,000",
-    6: "₦120,000",
+    1: "₦26,500",
+    2: "₦48,000",
+    3: "₦70,500",
+    4: "₦92,000",
+    5: "₦110,000",
+    6: "₦126,000",
+    7: "₦140,000",
+    8: "₦160,000",
+    9: "₦180,000",
+    10: "₦200,000",
   };
   return prices[quantity] || "₦0.00";
 }
