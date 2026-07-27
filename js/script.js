@@ -18,7 +18,7 @@ function disableOrderButtons() {
 // Assigns corresponding value to price based on Net quantity
 function getPrice(quantity) {
   const prices = {
-    1: "₦26,500",
+    1: "₦27,000",
     2: "₦48,000",
     3: "₦70,500",
     4: "₦92,000",
