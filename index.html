@@ -477,44 +477,51 @@
                 <h2 class="text-danger action-text title">
                     Place Your Order Now!
                 </h2>
+
                 <p>
                     Take advantage of our Promo currently ongoing and get yours at the most affordable price.
                     <img src="images/payment.png" class="img-fluid">
                 </p>
 
-                <form name="orderForm" method="POST" onsubmit="return checkForm()"
-                    action="https://myform.kinaxy.com/process-doornet-form/?r=https://kinaxydoornet.com/thank-you.html&bU=https://kinaxydoornet.com/">
-                    <input type="hidden" name="subject" value="New Order For Screen Magnetic Net" />
-                    <input type="hidden" name="price" value="₦0.00" />
-                    <input type="hidden" name="productName" value="Screen Magnetic Net" />
-                    <input type="hidden" name="productImageUrl"
-                        value="https://www.kinaxydoornet.com/images/kinaxy-doornet-banner-main-alt.jpg" />
+                <form name="orderForm" method="POST" action="https://myform.kinaxy.com/process-order/door-net/">
+                    <input type="hidden" name="order_source" value="door-net">
+                    <input type="hidden" name="subject" value="New Order For Screen Magnetic Net">
+                    <input type="hidden" name="price" value="₦0.00">
+                    <input type="hidden" name="product_name" value="Screen Magnetic Net">
+                    <input type="hidden" name="product_image_url"
+                        value="https://www.kinaxydoornet.com/images/kinaxy-doornet-banner-main-alt.jpg">
+
                     <div class="row field-row">
                         <div class="col-sm-6 mb-3">
                             <label for="fullname" class="form-label">Full Name *</label>
                             <input type="text" class="form-control" placeholder="Firstname Lastname" name="fullname" id="fullname"
                                 required>
                         </div>
+
                         <div class="col-sm-6 mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" placeholder="email@example.com" name="email" id="email">
                         </div>
                     </div>
+
                     <div class="row field-row">
                         <div class="col-sm-6 mb-3">
                             <label for="phone" class="form-label">Phone *</label>
                             <input type="tel" class="form-control" placeholder="07067868317" name="phone" id="phone" required>
                         </div>
+
                         <div class="col-sm-6 mb-3">
                             <label for="alt_phone" class="form-label">Alternative Phone</label>
                             <input type="tel" class="form-control" placeholder="07067868317" name="alt_phone" id="alt_phone">
                         </div>
                     </div>
+
                     <div class="row field-row">
                         <div class="col-sm-6 mb-3">
                             <label for="quantity" class="form-label">Quantity *</label>
+
                             <select name="quantity" id="quantity" required class="form-select">
-                                <option value="" selected="selected">Choose Quantity *</option>
+                                <option value="" selected disabled>Choose Quantity *</option>
                                 <option value="1">1 pack - ₦25,000</option>
                                 <option value="2">2 packs - ₦48,000</option>
                                 <option value="3">3 packs - ₦70,500</option>
@@ -527,12 +534,14 @@
                                 <option value="10">10 packs - ₦200,000</option>
                             </select>
                         </div>
+
                         <div class="col-sm-6 mb-3">
-                            <label for="state" class="form-label">Delivery State/Region *</label>
-                            <!-- <input type="text" id="state" name="state" class="form-control"
-                                placeholder="Enter state/region" required> -->
+                            <label for="state" class="form-label">
+                                Delivery State/Region *
+                            </label>
+            
                             <select name="state" id="state" required class="form-select">
-                                <option value="" selected="selected">Delivery State *</option>
+                                <option value="" selected disabled>Delivery State *</option>
                                 <option value="Lagos">Lagos</option>
                                 <option value="Abuja">Abuja</option>
                                 <option value="Rivers">Rivers</option>
@@ -573,15 +582,20 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="row field-row mb-3">
                         <div class="col-sm-6 mb-3">
                             <label for="address" class="form-label">Address *</label>
-                            <input type="text" class="form-control" placeholder="House No, Street Name & City"
-                                name="address" id="address" required>
+
+                            <input type="text" class="form-control" placeholder="House No, Street Name & City" name="address"
+                                id="address" required>
                         </div>
+
                         <div class="col-sm-6 mb-3">
-                            <button type="submit" id="orderNowBtn" class="btn btn-success btn-lg px-3 id-block rounded-pill mt-4 mb-2">Order
-                                Now!</button>
+                            <button type="submit" id="orderNowBtn"
+                                class="btn btn-success btn-lg px-3 d-block rounded-pill mt-4 mb-2">
+                                Order Now!
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -590,8 +604,10 @@
                     <button type="button" id="whatsappOrderBtn" class="btn btn-success btn-lg px-3 d-block rounded-pill mt-3">
                         Order Via WhatsApp
                     </button>
+
                     <h2 class="text-danger action-text title mt-3 text-center">
-                        For more enquiries, call: <a href="tel:+2347067868317">+2347067868317</a>
+                        For more enquiries, call:
+                        <a href="tel:+2347067868317">+2347067868317</a>
                     </h2>
                 </div>
             </div>
