@@ -71,6 +71,7 @@ function updatePriceUI(quantity) {
   const formattedPrice = getPrice(quantity);
 
   setText("heroPrice", getPrice(1));
+  setText("heroPriceTop", getPrice(1));
   setText("formPrice", formattedPrice);
   setText("stickyPrice", formattedPrice);
   setText("formQuantityLabel", getPackLabel(quantity));

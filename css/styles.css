@@ -924,6 +924,12 @@ button:disabled {
     font-size: 20px;
 }
 
+.price-block.promo-top {
+    margin-top: 0;
+    line-height: 0.7;
+    padding: 0 20px;
+}
+
 .offer-points {
     display: flex;
     flex-wrap: wrap;
