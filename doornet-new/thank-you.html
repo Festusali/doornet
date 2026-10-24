@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Order Confirmed | Kinaxy Doornet</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <!-- Meta Pixel -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+      fbq("init", "1736284044134655");
+      fbq("track", "PageView");
+    </script>
+    <!-- TikTok Pixel -->
+    <script>
+      !(function (w, d, t) {
+        w.TiktokAnalyticsObject = t;
+        var ttq = (w[t] = w[t] || []);
+        ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
+        ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))); }; };
+        for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+        ttq.instance = function (t) { for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]); return e; };
+        ttq.load = function (e, n) {
+          var r = "https://analytics.tiktok.com/i18n/pixel/events.js";
+          ttq._i = ttq._i || {};
+          ttq._i[e] = [];
+          ttq._i[e]._u = r;
+          ttq._t = ttq._t || {};
+          ttq._t[e] = +new Date();
+          ttq._o = ttq._o || {};
+          ttq._o[e] = n || {};
+          n = d.createElement("script");
+          n.type = "text/javascript";
+          n.async = !0;
+          n.src = r + "?sdkid=" + e + "&lib=" + t;
+          e = d.getElementsByTagName("script")[0];
+          e.parentNode.insertBefore(n, e);
+        };
+        ttq.load("D49JVJ3C77U8B5BDUK10");
+        ttq.page();
+      })(window, document, "ttq");
+    </script>
+  </head>
+  <body class="confirmation">
+    <main class="confirmation-page">
+      <section class="confirmation-card">
+        <div class="confirmation-mark" aria-hidden="true">✓</div>
+        <span class="kicker" style="justify-content:center">Order received</span>
+        <h1>Thank you!<br><em>You're all set.</em></h1>
+        <p>Your order has been received. We'll process your details and proceed with delivery.</p>
+        <div class="confirmation-action">
+          <a href="index.html" class="btn">Back to Kinaxy <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+    </main>
+    <script src="assets/thank-you.js"></script>
+  </body>
+</html>
