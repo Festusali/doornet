@@ -112,34 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePrice(quantity.value);
     trackConversionEvents(form, "AddToCart", "AddToCart");
     document.getElementById("orderNowBtn").disabled = true;
-    document.getElementById("whatsappOrderBtn").disabled = true;
     document.getElementById("orderNowBtn").textContent = "Submitting…";
-    document.getElementById("whatsappOrderBtn").textContent = "Submitting…";
-  });
-
-  // Handle WhatsApp order button click
-  document.getElementById("whatsappOrderBtn").addEventListener("click", () => {
-    if (!form.reportValidity()) return;
-    updatePrice(quantity.value);
-    trackConversionEvents(form, "InitiateCheckout", "InitiateCheckout");
-
-    const message = {
-      fullname: form.fullname.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      alt_phone: form.alt_phone.value,
-      quantity: form.quantity.value,
-      price: form.price.value,
-      state: form.state.value,
-      address: form.address.value,
-      product_name: form.product_name.value,
-      order_source: form.order_source.value,
-    };
-    sessionStorage.setItem("pendingWhatsappOrder", JSON.stringify(message));
-    document.getElementById("orderNowBtn").disabled = true;
-    document.getElementById("whatsappOrderBtn").disabled = true;
-    document.getElementById("whatsappOrderBtn").textContent = "Submitting…";
-    form.submit();
   });
 
   // Set the current year in the footer

@@ -708,14 +708,6 @@ h2 em {
     margin-top: 20px
 }
 
-.whatsapp {
-    background: #188c62
-}
-
-.whatsapp:hover {
-    background: #116e4d
-}
-
 .formnote {
     font-size: 11px;
     color: var(--muted);
